@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ms Lê Hằng English - IELTS Reading & Grammar Practice Test</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-pink: #ff80ab;
+      --primary-purple: #8854c0;
+      --accent-teal: #00C9A7;
+      --accent-yellow: #FDCB6E;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --correct-color: #00D26A;
+      --wrong-color: #FF4757;
+      --highlight-bg: #d1c4e9;
+      --highlight-color: #ffffff;
+      --text-dark: #2d3436;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(-45deg, #ff80ab, #8854c0, #00C9A7, #FDCB6E, #ffcdd2, #e1bee7);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><text x="10" y="30" font-size="22">🍲</text><text x="70" y="35" font-size="20">🧘‍♀️</text><text x="20" y="85" font-size="20">🌸</text><text x="80" y="90" font-size="22">⚠️</text><text x="50" y="60" font-size="18">🌟</text></svg>');
+      opacity: 0.22;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 3px solid #f8bbd0;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      z-index: 10;
+      flex-shrink: 0;
+    }
+
+    .brand-title h1 {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--primary-purple);
+      line-height: 1.2;
+    }
+
+    .brand-title h2 {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #e91e63;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .timer-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      padding: 5px 14px;
+      border-radius: 25px;
+      box-shadow: 0 3px 0 #e0e0e0;
+      border: 2px solid #f0f0f0;
+    }
+
+    .timer-display {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: #d81b60;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .btn-timer {
+      background: var(--primary-pink);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 3px 0 #d81b60;
+      transition: all 0.2s ease;
+      font-size: 0.8rem;
+    }
+
+    .btn-timer:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 0 #d81b60;
+    }
+
+    .progress-bar-wrapper {
+      width: 100%;
+      background: #e0e0e0;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-yellow), var(--correct-color));
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+
+    .tab-bar {
+      display: flex;
+      background: rgba(255,255,255,0.7);
+      padding: 8px 20px 0;
+      gap: 8px;
+      z-index: 9;
+      flex-shrink: 0;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      background: #fff;
+      border: 2px solid #f8bbd0;
+      border-bottom: none;
+      border-radius: 12px 12px 0 0;
+      font-weight: 800;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    .tab-btn.active {
+      background: var(--primary-purple);
+      color: white;
+      border-color: var(--primary-purple);
+      transform: translateY(-2px);
+    }
+
+    .main-container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 120px);
+      gap: 15px;
+      padding: 10px 15px 15px;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .split-pane {
+      flex: 1;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      border: 3px solid #fff;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 20px;
+      scroll-behavior: smooth;
+      height: 100%;
+    }
+
+    @media (max-width: 850px) {
+      body {
+        overflow-y: auto;
+      }
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+      }
+      .split-pane {
+        height: auto;
+        max-height: 600px;
+      }
+    }
+
+    .passage-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: var(--primary-purple);
+      margin-bottom: 12px;
+      text-align: center;
+      border-bottom: 2px dashed #f8bbd0;
+      padding-bottom: 8px;
+    }
+
+    .paragraph-block {
+      margin-bottom: 16px;
+      background: #fff;
+      padding: 14px;
+      border-radius: 15px;
+      border: 2px solid #f3e5f5;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.02);
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+
+    .trans-toggle-btn {
+      margin-top: 8px;
+      background: #f3e5f5;
+      color: #6a1b9a;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-block;
+      transition: all 0.2s;
+    }
+
+    .trans-toggle-btn:hover {
+      background: #e1bee7;
+    }
+
+    .translation-text {
+      display: none;
+      margin-top: 8px;
+      padding: 10px;
+      background: #fce4ec;
+      border-left: 4px solid var(--primary-pink);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #4a148c;
+      line-height: 1.6;
+    }
+
+    .sentence-target {
+      background-color: #fff59d !important;
+      border-radius: 4px;
+      padding: 2px 4px;
+      box-shadow: 0 0 10px #fbc02d;
+      animation: pulseHighlight 2s infinite;
+    }
+
+    @keyframes pulseHighlight {
+      0% { background-color: #fff59d; }
+      50% { background-color: #ffe082; }
+      100% { background-color: #fff59d; }
+    }
+
+    ::selection {
+      background-color: #d1c4e9;
+      color: #ffffff;
+    }
+
+    .custom-highlight {
+      background-color: #d1c4e9 !important;
+      color: #ffffff !important;
+      font-weight: bold;
+      border-radius: 4px;
+      padding: 1px 3px;
+    }
+
+    /* CSS Drawings for Signs */
+    .sign-card-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 15px;
+      padding: 15px;
+      margin: 15px 0;
+      border: 2px dashed #ce93d8;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+
+    .sign-caution-box {
+      border: 5px solid #d63031;
+      border-radius: 10px;
+      background: #ffd32a;
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+      overflow: hidden;
+      box-shadow: 0 5px 0 #b22222;
+    }
+
+    .sign-caution-header {
+      background: #000;
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.3rem;
+      padding: 6px;
+      letter-spacing: 2px;
+    }
+
+    .sign-caution-body {
+      padding: 12px;
+      color: #000;
+      font-weight: 900;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    .sign-no-pick-flower {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 12px solid #d63031;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+    }
+
+    .sign-no-pick-flower::before {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 12px;
+      background: #d63031;
+      transform: rotate(-45deg);
+    }
+
+    .glossary-section {
+      margin-top: 25px;
+      background: #fff;
+      border-radius: 15px;
+      padding: 15px;
+      border: 2px solid #e1bee7;
+    }
+
+    .glossary-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary-purple);
+      margin-bottom: 12px;
+    }
+
+    .glossary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    .glossary-table th, .glossary-table td {
+      border: 1px solid #f8bbd0;
+      padding: 6px 8px;
+      text-align: left;
+    }
+
+    .glossary-table th {
+      background: #f8bbd0;
+      color: #8854c0;
+      font-weight: 800;
+    }
+
+    .glossary-table tr:nth-child(even) {
+      background: #fcf4f8;
+    }
+
+    .question-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 20px;
+      border: 3px solid #f0f0f0;
+      box-shadow: 0 5px 0 #e0e0e0;
+      transition: transform 0.2s;
+    }
+
+    .question-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .question-number {
+      font-weight: 900;
+      color: var(--primary-purple);
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .question-text {
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .mcq-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mcq-btn {
+      background: #f8f9fa;
+      border: 2px solid #e9ecef;
+      border-radius: 14px;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      box-shadow: 0 3px 0 #dee2e6;
+      transition: all 0.15s ease;
+      color: #495057;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mcq-btn:hover {
+      background: #fce4ec;
+      border-color: var(--primary-pink);
+      transform: scale(1.01);
+    }
+
+    .mcq-btn.correct {
+      background: var(--correct-color) !important;
+      color: white !important;
+      border-color: #00b853 !important;
+      box-shadow: 0 4px 0 #009624 !important;
+    }
+
+    .mcq-btn.wrong {
+      background: var(--wrong-color) !important;
+      color: white !important;
+      border-color: #d63031 !important;
+      box-shadow: 0 4px 0 #c0392b !important;
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .explanation-box {
+      display: none;
+      margin-top: 15px;
+      background: #f3e5f5;
+      border-radius: 14px;
+      padding: 14px;
+      border-left: 5px solid var(--primary-purple);
+      font-size: 0.9rem;
+      animation: fadeIn 0.3s ease;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .exp-step-title {
+      font-weight: 800;
+      color: var(--primary-purple);
+      margin-top: 8px;
+    }
+
+    .btn-locate {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fff;
+      color: #6a1b9a;
+      border: 2px solid #ab47bc;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 2px 0 #ab47bc;
+      transition: all 0.2s;
+    }
+
+    .btn-locate:hover {
+      background: #ab47bc;
+      color: white;
+    }
+
+    .action-bar {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .btn-submit-test {
+      background: linear-gradient(45deg, #FF4081, #7C4DFF);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 900;
+      padding: 12px 35px;
+      border: none;
+      border-radius: 30px;
+      box-shadow: 0 5px 0 #c2185b;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-submit-test:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 #c2185b;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-card {
+      background: #fff;
+      border-radius: 25px;
+      padding: 30px;
+      width: 90%;
+      max-width: 450px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      border: 4px solid var(--primary-pink);
+      animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popUp {
+      from { transform: scale(0.6); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-score {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--primary-purple);
+      margin: 12px 0;
+    }
+
+    .modal-badge {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #e91e63;
+      margin-bottom: 15px;
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 99;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: var(--primary-pink); border-radius: 10px; }
+  </style>
+</head>
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Header Bar -->
+  <header>
+    <div class="brand-title">
+      <h1>Ms Lê Hằng English</h1>
+      <h2>IELTS READING & GRAMMAR MOCK TEST</h2>
+    </div>
+
+    <div class="timer-container">
+      <span style="font-size: 1.1rem;">⏱️</span>
+      <div id="timerDisplay" class="timer-display">20:00</div>
+      <button id="btnTimerControl" class="btn-timer" onclick="toggleTimer()">BẮT ĐẦU TÍNH GIỜ LÀM BÀI</button>
+    </div>
+  </header>
+
+  <!-- Progress Bar -->
+  <div style="padding: 0 20px; background: rgba(255,255,255,0.85);">
+    <div class="progress-bar-wrapper">
+      <div id="progressBarFill" class="progress-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- Passage Tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab(1)">Bài 1: Signs & Food Culture (Q29-Q36)</button>
+    <button class="tab-btn" onclick="switchTab(2)">Bài 2: Benefits of Yoga (Q37-Q40)</button>
+  </div>
+
+  <div class="main-container">
+
+    <!-- LEFT PANE: READING PASSAGES & VISUAL NOTICES -->
+    <div class="split-pane" id="passagePane">
+      
+      <!-- TAB 1 CONTENT: SIGNS & FOOD CULTURE -->
+      <div id="passage1" class="passage-content">
+        <h2 class="passage-title">SECTION I: VISUAL NOTICES & SIGNS</h2>
+        
+        <!-- Q29 Sign CSS Drawing -->
+        <div class="sign-card-wrapper">
+          <div class="sign-caution-box">
+            <div class="sign-caution-header">CAUTION!</div>
+            <div class="sign-caution-body">
+              SLOW DOWN<br>
+              CHILDREN CROSSING 🚶‍♂️🏃‍♀️
+            </div>
+          </div>
+          <p style="margin-top:8px; font-weight:800; color:#555;">Notice 1: Road Caution Sign</p>
+        </div>
+
+        <!-- Q30 Sign CSS Drawing -->
+        <div class="sign-card-wrapper">
+          <div class="sign-no-pick-flower">
+            <span style="font-size:2.2rem;">🌸</span>
+          </div>
+          <p style="margin-top:8px; font-weight:800; color:#555;">Notice 2: Park Rule Sign (No Picking Flowers)</p>
+        </div>
+
+        <h2 class="passage-title" style="margin-top:25px;">SECTION II: VIETNAMESE & AMERICAN FOOD CULTURE</h2>
+        
+        <div class="paragraph-block">
+          <p>
+            <span id="p1-s1" class="sentence">The basic food in Viet Nam is often dry.</span> 
+            <span id="p1-s2" class="sentence">The meals usually come with rice, vegetables, eggs, and small amounts of meat and fish.</span> 
+            <span id="p1-s3" class="sentence">Although similar to Chinese cooking, Vietnamese cooking uses little fat or oil for frying.</span> 
+            <span id="p1-s4" class="sentence">Fish sauce is a main spice in almost every Vietnamese dish.</span> 
+            <span id="p1-s5" class="sentence">As same as Vietnamese, in America they have three meals a day with some snacking on fruits and soups.</span> 
+            <span id="p1-s6" class="sentence">The cuisine is very diverse in the United States by the rich and influential people from the large population and a variety of immigrants.</span> 
+            <span id="p1-s7" class="sentence">However, traditional American cuisine uses ingredients such as chicken, potatoes and sweet potatoes.</span> 
+            <span id="p1-s8" class="sentence">Meat barbecue, apple pies, potato chips, cotton candy and chocolate chip cookies are the foods that define American styles.</span> 
+            <span id="p1-s9" class="sentence">Regarding eating style, the Vietnamese use spoons, chopsticks and a bowl.</span> 
+            <span id="p1-s10" class="sentence">In contrast, the Americans use knives, spoons, forks and plates.</span>
+          </p>
+          <button class="trans-toggle-btn" onclick="toggleTranslation('trans1')">🌟 Mở dịch đoạn này</button>
+          <div id="trans1" class="translation-text">
+            Thức ăn cơ bản ở Việt Nam thường khô. Các bữa ăn thường đi kèm với cơm, rau, trứng và một lượng nhỏ thịt và cá. Mặc dù tương tự như cách nấu ăn của người Trung Quốc, nấu ăn Việt Nam sử dụng rất ít mỡ hoặc dầu để chiên xào. Nước mắm là gia vị chính trong hầu hết mọi món ăn Việt Nam. Giống như người Việt Nam, ở Mỹ họ ăn ba bữa một ngày cùng với việc ăn vặt một số loại trái cây và súp. Ẩm thực ở Hoa Kỳ rất đa dạng bởi tầng lớp giàu có và có ảnh hưởng từ dân số đông đảo và sự đa dạng của những người nhập cư. Tuy nhiên, ẩm thực truyền thống của Mỹ sử dụng các nguyên liệu như gà, khoai tây và khoai lang. Thịt nướng, bánh táo, khoai tây chiên, kẹo bông và bánh quy sô-cô-la chip là những món ăn định hình phong cách Mỹ. Về phong cách ăn uống, người Việt Nam dùng thìa, đũa và bát. Ngược lại, người Mỹ dùng dao, thìa, nĩa và đĩa.
+          </div>
+        </div>
+
+        <!-- Glossary cho Bài 1 -->
+        <div class="glossary-section">
+          <div class="glossary-title">📖 Vocabulary Bank - Bài 1 (Food Culture & Signs)</div>
+          <table class="glossary-table">
+            <thead>
+              <tr><th>Word</th><th>POS</th><th>Vietnamese Meaning</th><th>Synonym / Context</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Caution</td><td>(n)</td><td>Lời cảnh báo, sự chú ý</td><td>Warning, alert, care</td></tr>
+              <tr><td>Cross</td><td>(v)</td><td>Băng qua, sang đường</td><td>Traverse, pass over</td></tr>
+              <tr><td>Pick up</td><td>(phr v)</td><td>Ngắt, hái (hoa)</td><td>Gather, pluck, collect</td></tr>
+              <tr><td>Cuisine</td><td>(n)</td><td>Nền ẩm thực</td><td>Culinary art, food style</td></tr>
+              <tr><td>Spice</td><td>(n)</td><td>Gia vị</td><td>Seasoning, flavoring</td></tr>
+              <tr><td>Similar</td><td>(adj)</td><td>Tương tự, giống nhau</td><td>Alike, comparable, kin</td></tr>
+              <tr><td>Diverse</td><td>(adj)</td><td>Đa dạng, phong phú</td><td>Various, varied, assorted</td></tr>
+              <tr><td>Immigrant</td><td>(n)</td><td>Người nhập cư</td><td>Settler, newcomer</td></tr>
+              <tr><td>Influential</td><td>(adj)</td><td>Có ảnh hưởng lớn</td><td>Powerful, prominent</td></tr>
+              <tr><td>Define</td><td>(v)</td><td>Định hình, xác định</td><td>Characterize, outline</td></tr>
+              <tr><td>Contrast</td><td>(n/v)</td><td>Sự tương phản, đối lập</td><td>Difference, opposition</td></tr>
+              <tr><td>Chopsticks</td><td>(n)</td><td>Đôi đũa</td><td>Eating utensils</td></tr>
+              <tr><td>Different</td><td>(adj)</td><td>Khác biệt (Trái nghĩa similar)</td><td>Distinct, unalike, varied</td></tr>
+              <tr><td>Various</td><td>(adj)</td><td>Đa dạng (Đồng nghĩa diverse)</td><td>Diverse, manifold</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TAB 2 CONTENT: BENEFITS OF YOGA -->
+      <div id="passage2" class="passage-content" style="display:none;">
+        <h2 class="passage-title">SECTION III: BENEFITS OF YOGA</h2>
+        
+        <div class="paragraph-block">
+          <p>
+            <span id="p2-s1" class="sentence">Yoga originates in India and (37)______.</span> 
+            <span id="p2-s2" class="sentence">Anyone can do Yoga- women or men, adults or children.</span> 
+            <span id="p2-s3" class="sentence">Special children’s classes are devised to help them cope with pressures (38)______.</span> 
+            <span id="p2-s4" class="sentence">By learning how to co-ordinate breathing and movement, yoga helps them to develop body awareness, (39)______.</span> 
+            <span id="p2-s5" class="sentence">Taking up yoga also helps them to focus and become better with daily routines.</span> 
+            <span id="p2-s6" class="sentence">An ideal time to do yoga is (40)______.</span>
+          </p>
+
+          <div style="background:#fff8e1; border:2px solid #ffe082; padding:12px; border-radius:12px; margin-top:10px; font-size:0.9rem;">
+            <strong>Các cụm từ cần chọn để điền vào chỗ trống:</strong><br>
+            <strong>A.</strong> they feel from school work<br>
+            <strong>B.</strong> before breakfast<br>
+            <strong>C.</strong> it is good for both your body and mind<br>
+            <strong>D.</strong> Self-control and flexibility
+          </div>
+
+          <button class="trans-toggle-btn" onclick="toggleTranslation('trans2')">🌟 Mở dịch đoạn này</button>
+          <div id="trans2" class="translation-text">
+            Yoga bắt nguồn từ Ấn Độ và nó tốt cho cả cơ thể lẫn tâm trí bạn. Bất kỳ ai cũng có thể tập Yoga - phụ nữ hay nam giới, người lớn hay trẻ em. Các lớp học đặc biệt dành cho trẻ em được thiết kế để giúp các em ứng phó với áp lực mà các em gặp phải từ việc học ở trường. Bằng cách học cách phối hợp hơi thở và chuyển động, yoga giúp các em phát triển nhận thức cơ thể, sự tự chủ và độ dẻo dai. Bắt đầu tập yoga cũng giúp các em tập trung và thực hiện tốt hơn các hoạt động hàng ngày. Thời điểm lý tưởng để tập yoga là trước bữa ăn sáng.
+          </div>
+        </div>
+
+        <!-- Glossary cho Bài 2 -->
+        <div class="glossary-section">
+          <div class="glossary-title">📖 Vocabulary Bank - Bài 2 (Benefits of Yoga)</div>
+          <table class="glossary-table">
+            <thead>
+              <tr><th>Word</th><th>POS</th><th>Vietnamese Meaning</th><th>Synonym / Context</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Originate</td><td>(v)</td><td>Bắt nguồn, khởi nguồn</td><td>Stem from, arise, derive</td></tr>
+              <tr><td>Devise</td><td>(v)</td><td>Sáng chế, thiết kế</td><td>Design, invent, formulate</td></tr>
+              <tr><td>Pressure</td><td>(n)</td><td>Áp lực, căng thẳng</td><td>Stress, tension, strain</td></tr>
+              <tr><td>Co-ordinate</td><td>(v)</td><td>Phối hợp, điều phối</td><td>Harmonize, integrate</td></tr>
+              <tr><td>Awareness</td><td>(n)</td><td>Sự nhận thức, ý thức</td><td>Consciousness, perception</td></tr>
+              <tr><td>Self-control</td><td>(n)</td><td>Sự tự chủ, kiềm chế</td><td>Discipline, restraint</td></tr>
+              <tr><td>Flexibility</td><td>(n)</td><td>TÍnh dẻo dai, linh hoạt</td><td>Agility, suppleness</td></tr>
+              <tr><td>Take up</td><td>(phr v)</td><td>Bắt đầu (một thói quen)</td><td>Begin, adopt, start</td></tr>
+              <tr><td>Focus</td><td>(v/n)</td><td>Tập trung</td><td>Concentrate, pay attention</td></tr>
+              <tr><td>Ideal</td><td>(adj)</td><td>Lý tưởng, hoàn hảo</td><td>Perfect, optimal, prime</td></tr>
+              <tr><td>Mindful</td><td>(adj)</td><td>Tỉnh thức, chú tâm</td><td>Attentive, conscious</td></tr>
+              <tr><td>Wellness</td><td>(n)</td><td>Phúc lợi, sức khỏe tốt</td><td>Health, well-being</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT PANE: INTERACTIVE EXERCISES -->
+    <div class="split-pane" id="exercisePane">
+      
+      <!-- CÂU HỎI BÀI 1 (TAB 1) -->
+      <div id="exerciseTab1" class="exercise-tab-content">
+        <h3 style="color:var(--primary-purple); margin-bottom:15px;">SECTION I: VISUAL NOTICES & FOOD CULTURE (QUESTIONS 29 - 36)</h3>
+
+        <!-- Q29 -->
+        <div class="question-card" id="qcard-29">
+          <div class="question-number">Question 29 (Notice Comprehension)</div>
+          <div class="question-text">What does the notice say? ("CAUTION! SLOW DOWN CHILDREN CROSSING")</div>
+          <div class="mcq-options" id="opts-29" data-correct="A">
+            <button class="mcq-btn" onclick="checkMCQ('29', 'A', 'A')">A. You must drive slowly.</button>
+            <button class="mcq-btn" onclick="checkMCQ('29', 'B', 'A')">B. Children must walk slowly.</button>
+            <button class="mcq-btn" onclick="checkMCQ('29', 'C', 'A')">C. Children can't cross the street here.</button>
+            <button class="mcq-btn" onclick="checkMCQ('29', 'D', 'A')">D. You must speed up.</button>
+          </div>
+          <div class="explanation-box" id="exp-29">
+            <div class="exp-step-title">1. Phân tích 4 đáp án:</div>
+            <p>A. You must drive slowly (v phr): Bạn phải lái xe chậm rãi.</p>
+            <p>B. Children must walk slowly (v phr): Trẻ em phải đi bộ chậm rãi.</p>
+            <p>C. Children can't cross the street here (v phr): Trẻ em không thể sang đường ở đây.</p>
+            <p>D. You must speed up (v phr): Bạn phải tăng tốc độ lái xe lên.</p>
+            <div class="exp-step-title">2. Dịch nghĩa biển báo:</div>
+            <p>"CẢNH BÁO! HÃY ĐI CHẬM - CÓ TRẺ EM ĐANG SANG ĐƯỜNG"</p>
+            <div class="exp-step-title">3. Tại sao chọn A?</div>
+            <p>Biển báo "CAUTION! SLOW DOWN" nhắm vào tài xế điều khiển phương tiện, yêu cầu giảm tốc độ ("drive slowly") vì có trẻ em băng qua đường -> Chọn A.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>B sai đối tượng (không phải bắt trẻ em đi chậm). C sai hoàn toàn nội dung cấm đoán. D sai ngược nghĩa (speed up = tăng tốc).</p>
+          </div>
+        </div>
+
+        <!-- Q30 -->
+        <div class="question-card" id="qcard-30">
+          <div class="question-number">Question 30 (Notice Comprehension)</div>
+          <div class="question-text">What does the sign say? (Red circle with slash over flower picking)</div>
+          <div class="mcq-options" id="opts-30" data-correct="A">
+            <button class="mcq-btn" onclick="checkMCQ('30', 'A', 'A')">A. We mustn't pick up flowers.</button>
+            <button class="mcq-btn" onclick="checkMCQ('30', 'B', 'A')">B. We may pick up small flowers.</button>
+            <button class="mcq-btn" onclick="checkMCQ('30', 'C', 'A')">C. Don’t bring flowers along.</button>
+            <button class="mcq-btn" onclick="checkMCQ('30', 'D', 'A')">D. There are on flowers around here.</button>
+          </div>
+          <div class="explanation-box" id="exp-30">
+            <div class="exp-step-title">1. Phân tích 4 đáp án:</div>
+            <p>A. We mustn't pick up flowers (v phr): Chúng ta không được phép ngắt/hái hoa.</p>
+            <p>B. We may pick up small flowers (v phr): Chúng ta có thể hái những bông hoa nhỏ.</p>
+            <p>C. Don’t bring flowers along (v phr): Đừng mang theo hoa.</p>
+            <p>D. There are on flowers around here (v phr): Sai cấu trúc ngữ pháp.</p>
+            <div class="exp-step-title">2. Dịch nghĩa biển báo:</div>
+            <p>Biển báo hình tròn đỏ có đường gạch chéo đè lên bàn tay đang hái hoa có nghĩa là "CẤM HÁI HOA".</p>
+            <div class="exp-step-title">3. Tại sao chọn A?</div>
+            <p>Vòng tròn cấm biểu thị hành vi không được phép ("mustn't"). Cụm "pick up flowers" là hái/ngắt hoa -> "We mustn't pick up flowers" -> Chọn A.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>B cho phép ngắt hoa (may pick) là sai. C nhầm sang cấm mang hoa theo. D viết sai ngữ pháp.</p>
+          </div>
+        </div>
+
+        <!-- Q31 -->
+        <div class="question-card" id="qcard-31">
+          <div class="question-number">Question 31</div>
+          <div class="question-text">The passage is mainly about .............</div>
+          <div class="mcq-options" id="opts-31" data-correct="A">
+            <button class="mcq-btn" onclick="checkMCQ('31', 'A', 'A')">A. Vietnamese food culture is very different from American food culture.</button>
+            <button class="mcq-btn" onclick="checkMCQ('31', 'B', 'A')">B. Vietnamese cooking is similar to Chinese cooking.</button>
+            <button class="mcq-btn" onclick="checkMCQ('31', 'C', 'A')">C. American cuisine is very diverse.</button>
+            <button class="mcq-btn" onclick="checkMCQ('31', 'D', 'A')">D. Traditional American cuisine uses chicken, potatoes and sweet potatoes.</button>
+          </div>
+          <div class="explanation-box" id="exp-31">
+            <div class="exp-step-title">1. Phân tích 4 đáp án:</div>
+            <p>A. Văn hóa ẩm thực Việt Nam rất khác với văn hóa ẩm thực Mỹ.</p>
+            <p>B. Cách nấu ăn Việt Nam tương tự như nấu ăn Trung Quốc.</p>
+            <p>C. Ẩm thực Mỹ rất đa dạng.</p>
+            <p>D. Ẩm thực truyền thống Mỹ dùng gà, khoai tây và khoai lang.</p>
+            <div class="exp-step-title">2. Dịch nghĩa câu hỏi:</div>
+            <p>"Đoạn văn chủ yếu nói về điều gì?"</p>
+            <div class="exp-step-title">3. Tại sao chọn A?</div>
+            <p>Bài văn liên tục đối chiếu văn hóa ẩm thực Việt Nam (món khô, đũa/bát, dùng nước mắm...) với Mỹ (đa dạng, nĩa/dao/đĩa, nướng/ngọt...). Đáp án A bao quát được toàn bộ sự so sánh khác biệt này.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>B, C, D chỉ là các ý phụ chi tiết nằm ở từng câu riêng lẻ, không phải chủ đề bao quát (main idea) của cả đoạn văn.</p>
+            <button class="btn-locate" onclick="locateEvidence('p1-s9')">🖱️ Vị trí dẫn chứng</button>
+          </div>
+        </div>
+
+        <!-- Q32 -->
+        <div class="question-card" id="qcard-32">
+          <div class="question-number">Question 32</div>
+          <div class="question-text">What is the main spice in almost every Vietnamese dish?</div>
+          <div class="mcq-options" id="opts-32" data-correct="D">
+            <button class="mcq-btn" onclick="checkMCQ('32', 'A', 'D')">A. rice</button>
+            <button class="mcq-btn" onclick="checkMCQ('32', 'B', 'D')">B. vegetable</button>
+            <button class="mcq-btn" onclick="checkMCQ('32', 'C', 'D')">C. eggs</button>
+            <button class="mcq-btn" onclick="checkMCQ('32', 'D', 'D')">D. fish sauce</button>
+          </div>
+          <div class="explanation-box" id="exp-32">
+            <div class="exp-step-title">1. Phân tích 4 đáp án:</div>
+            <p>A. rice (n): gạo, cơm.</p>
+            <p>B. vegetable (n): rau củ.</p>
+            <p>C. eggs (n): trứng.</p>
+            <p>D. fish sauce (n): nước mắm (gia vị).</p>
+            <div class="exp-step-title">2. Dịch nghĩa câu hỏi:</div>
+            <p>"Gia vị chính trong hầu hết mọi món ăn Việt Nam là gì?"</p>
+            <div class="exp-step-title">3. Tại sao chọn D?</div>
+            <p>Dẫn chứng trong bài: "Fish sauce is a main spice in almost every Vietnamese dish" (Nước mắm là gia vị chính trong hầu hết mọi món ăn Việt) -> Chọn D.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>Rice, vegetables, eggs là nguyên liệu thực phẩm đi kèm bữa ăn chứ không phải "spice" (gia vị).</p>
+            <button class="btn-locate" onclick="locateEvidence('p1-s4')">🖱️ Vị trí dẫn chứng</button>
+          </div>
+        </div>
+
+        <!-- Q33 -->
+        <div class="question-card" id="qcard-33">
+          <div class="question-number">Question 33</div>
+          <div class="question-text">What makes the cuisine in the United state diverse?</div>
+          <div class="mcq-options" id="opts-33" data-correct="B">
+            <button class="mcq-btn" onclick="checkMCQ('33', 'A', 'B')">A. Three meals a day with some snacking on fruits and soups.</button>
+            <button class="mcq-btn" onclick="checkMCQ('33', 'B', 'B')">B. The rich and influential people from the large population and a variety of immigrants.</button>
+            <button class="mcq-btn" onclick="checkMCQ('33', 'C', 'B')">C. Meat barbecue, apple pies, potato chips, cotton candy and chocolate chip cookies.</button>
+            <button class="mcq-btn" onclick="checkMCQ('33', 'D', 'B')">D. Chicken, potatoes and sweet potatoes.</button>
+          </div>
+          <div class="explanation-box" id="exp-33">
+            <div class="exp-step-title">1. Phân tích 4 đáp án:</div>
+            <p>A. Ba bữa ăn một ngày cùng việc ăn vặt hoa quả và súp.</p>
+            <p>B. Người giàu có, có ảnh hưởng từ dân số đông và sự đa dạng người nhập cư.</p>
+            <p>C. Thịt nướng, bánh táo, khoai tây chiên...</p>
+            <p>D. Thịt gà, khoai tây và khoai lang.</p>
+            <div class="exp-step-title">2. Dịch nghĩa câu hỏi:</div>
+            <p>"Điều gì khiến cho ẩm thực ở Hoa Kỳ trở nên đa dạng (diverse)?"</p>
+            <div class="exp-step-title">3. Tại sao chọn B?</div>
+            <p>Dẫn chứng trong bài: "The cuisine is very diverse in the United States by the rich and influential people from the large population and a variety of immigrants" -> Chọn B.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>A là chế độ ăn hàng ngày. C và D liệt kê tên món ăn/nguyên liệu chứ không phải lý do tạo nên tính đa dạng.</p>
+            <button class="btn-locate" onclick="locateEvidence('p1-s6')">🖱️ Vị trí dẫn chứng</button>
+          </div>
+        </div>
+
+        <!-- Q34 -->
+        <div class="question-card" id="qcard-34">
+          <div class="question-number">Question 34</div>
+          <div class="question-text">What is NOT MENTIONED about Vietnamese and American cuisine?</div>
+          <div class="mcq-options" id="opts-34" data-correct="B">
+            <button class="mcq-btn" onclick="checkMCQ('34', 'A', 'B')">A. ingredients</button>
+            <button class="mcq-btn" onclick="checkMCQ('34', 'B', 'B')">B. prices</button>
+            <button class="mcq-btn" onclick="checkMCQ('34', 'C', 'B')">C. number of meals a day</button>
+            <button class="mcq-btn" onclick="checkMCQ('34', 'D', 'B')">D. eating style</button>
+          </div>
+          <div class="explanation-box" id="exp-34">
+            <div class="exp-step-title">1. Phân tích 4 đáp án:</div>
+            <p>A. ingredients: nguyên liệu nấu ăn (có đề cập: chicken, potatoes...)</p>
+            <p>B. prices: giá cả món ăn (KHÔNG có đề cập).</p>
+            <p>C. number of meals a day: số bữa ăn/ngày (có đề cập: three meals a day).</p>
+            <p>D. eating style: phong cách ăn (có đề cập: chopsticks vs forks/knives).</p>
+            <div class="exp-step-title">2. Dịch nghĩa câu hỏi:</div>
+            <p>"Điều gì KHÔNG ĐƯỢC ĐỀ CẬP (NOT MENTIONED) về ẩm thực Việt và Mỹ?"</p>
+            <div class="exp-step-title">3. Tại sao chọn B?</div>
+            <p>Toàn bộ bài đọc không hề nhắc tới "prices" (giá cả) đắt hay rẻ của các món ăn -> Chọn B.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>Ingredients, number of meals a day và eating style đều được đề cập rõ ràng trong bài.</p>
+            <button class="btn-locate" onclick="locateEvidence('p1-s7')">🖱️ Vị trí dẫn chứng</button>
+          </div>
+        </div>
+
+        <!-- Q35 -->
+        <div class="question-card" id="qcard-35">
+          <div class="question-number">Question 35 (Vocabulary - Opposite)</div>
+          <div class="question-text">What is the OPPOSITE of "similar" as used in the passage?</div>
+          <div class="mcq-options" id="opts-35" data-correct="A">
+            <button class="mcq-btn" onclick="checkMCQ('35', 'A', 'A')">A. different</button>
+            <button class="mcq-btn" onclick="checkMCQ('35', 'B', 'A')">B. alike</button>
+            <button class="mcq-btn" onclick="checkMCQ('35', 'C', 'A')">C. familiar</button>
+            <button class="mcq-btn" onclick="checkMCQ('35', 'D', 'A')">D. difficult</button>
+          </div>
+          <div class="explanation-box" id="exp-35">
+            <div class="exp-step-title">1. Phân tích 4 đáp án:</div>
+            <p>A. different (adj): khác biệt (trái nghĩa với similar).</p>
+            <p>B. alike (adj): giống nhau.</p>
+            <p>C. familiar (adj): quen thuộc.</p>
+            <p>D. difficult (adj): khó khăn.</p>
+            <div class="exp-step-title">2. Dịch nghĩa câu hỏi:</div>
+            <p>"Từ TRÁI NGHĨA (OPPOSITE) với từ 'similar' (tương tự, giống) là gì?"</p>
+            <div class="exp-step-title">3. Tại sao chọn A?</div>
+            <p>Similar = giống nhau, tương tự. Từ trái nghĩa trực tiếp là "different" (khác biệt) -> Chọn A.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>Alike và familiar là từ gần nghĩa với similar. Difficult có nghĩa là khó khăn, không mang nghĩa trái ngược.</p>
+            <button class="btn-locate" onclick="locateEvidence('p1-s3')">🖱️ Vị trí dẫn chứng</button>
+          </div>
+        </div>
+
+        <!-- Q36 -->
+        <div class="question-card" id="qcard-36">
+          <div class="question-number">Question 36 (Vocabulary - Closest)</div>
+          <div class="question-text">What is the CLOSEST meaning of "diverse" as used in the passage?</div>
+          <div class="mcq-options" id="opts-36" data-correct="B">
+            <button class="mcq-btn" onclick="checkMCQ('36', 'A', 'B')">A. diligent</button>
+            <button class="mcq-btn" onclick="checkMCQ('36', 'B', 'B')">B. various</button>
+            <button class="mcq-btn" onclick="checkMCQ('36', 'C', 'B')">C. great</button>
+            <button class="mcq-btn" onclick="checkMCQ('36', 'D', 'B')">D. interesting</button>
+          </div>
+          <div class="explanation-box" id="exp-36">
+            <div class="exp-step-title">1. Phân tích 4 đáp án:</div>
+            <p>A. diligent (adj): siêng năng, siêng học.</p>
+            <p>B. various (adj): đa dạng, nhiều loại khác nhau.</p>
+            <p>C. great (adj): tuyệt vời.</p>
+            <p>D. interesting (adj): thú vị.</p>
+            <div class="exp-step-title">2. Dịch nghĩa câu hỏi:</div>
+            <p>"Từ GẦN NGHĨA NHẤT (CLOSEST) với từ 'diverse' (đa dạng) là gì?"</p>
+            <div class="exp-step-title">3. Tại sao chọn B?</div>
+            <p>Diverse = đa dạng, phong phú = various -> Chọn B.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>Diligent (chăm chỉ), great (tốt), interesting (thú vị) không đồng nghĩa với phong phú, đa dạng.</p>
+            <button class="btn-locate" onclick="locateEvidence('p1-s6')">🖱️ Vị trí dẫn chứng</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CÂU HỎI BÀI 2 (TAB 2) -->
+      <div id="exerciseTab2" class="exercise-tab-content" style="display:none;">
+        <h3 style="color:var(--primary-purple); margin-bottom:15px;">SECTION III: BENEFITS OF YOGA (QUESTIONS 37 - 40)</h3>
+
+        <!-- Q37 -->
+        <div class="question-card" id="qcard-37">
+          <div class="question-number">Question 37 (Sentence Insertion)</div>
+          <div class="question-text">Yoga originates in India and (37)______. Anyone can do Yoga- women or men...</div>
+          <div class="mcq-options" id="opts-37" data-correct="C">
+            <button class="mcq-btn" onclick="checkMCQ('37', 'A', 'C')">A. they feel from school work</button>
+            <button class="mcq-btn" onclick="checkMCQ('37', 'B', 'C')">B. before breakfast</button>
+            <button class="mcq-btn" onclick="checkMCQ('37', 'C', 'C')">C. it is good for both your body and mind</button>
+            <button class="mcq-btn" onclick="checkMCQ('37', 'D', 'C')">D. Self-control and flexibility</button>
+          </div>
+          <div class="explanation-box" id="exp-37">
+            <div class="exp-step-title">1. Phân tích 4 lựa chọn điền:</div>
+            <p>A. they feel from school work: các em cảm thấy từ việc học ở trường.</p>
+            <p>B. before breakfast: trước bữa ăn sáng.</p>
+            <p>C. it is good for both your body and mind: nó tốt cho cả cơ thể lẫn tâm trí bạn.</p>
+            <p>D. Self-control and flexibility: Sự tự chủ và tính dẻo dai.</p>
+            <div class="exp-step-title">2. Dịch nghĩa câu 37:</div>
+            <p>"Yoga bắt nguồn từ Ấn Độ và (37) [nó tốt cho cả cơ thể lẫn tâm trí bạn]."</p>
+            <div class="exp-step-title">3. Tại sao chọn C?</div>
+            <p>Mới bắt đầu giới thiệu khái niệm Yoga, cụm "it is good for both your body and mind" bổ sung vị ngữ hoàn hảo giải thích lợi ích tổng quan của Yoga trước khi nhắc đến các lứa tuổi -> Chọn C.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>A, B, D sai cấu trúc ngữ pháp mệnh đề nối song song với "Yoga originates in India and...".</p>
+            <button class="btn-locate" onclick="locateEvidence('p2-s1')">🖱️ Vị trí dẫn chứng</button>
+          </div>
+        </div>
+
+        <!-- Q38 -->
+        <div class="question-card" id="qcard-38">
+          <div class="question-number">Question 38 (Sentence Insertion)</div>
+          <div class="question-text">Special children’s classes are devised to help them cope with pressures (38)______.</div>
+          <div class="mcq-options" id="opts-38" data-correct="A">
+            <button class="mcq-btn" onclick="checkMCQ('38', 'A', 'A')">A. they feel from school work</button>
+            <button class="mcq-btn" onclick="checkMCQ('38', 'B', 'A')">B. before breakfast</button>
+            <button class="mcq-btn" onclick="checkMCQ('38', 'C', 'A')">C. it is good for both your body and mind</button>
+            <button class="mcq-btn" onclick="checkMCQ('38', 'D', 'A')">D. Self-control and flexibility</button>
+          </div>
+          <div class="explanation-box" id="exp-38">
+            <div class="exp-step-title">1. Phân tích ngữ cảnh:</div>
+            <p>Đang nói về lớp học dành cho trẻ em ("children's classes") giúp các em đối phó với áp lực ("pressures"). Mệnh đề quan hệ rút gọn "they feel from school work" (áp lực mà các em gặp từ việc học) bổ nghĩa cho từ "pressures".</p>
+            <div class="exp-step-title">2. Dịch nghĩa câu 38:</div>
+            <p>"Lớp học đặc biệt cho trẻ em được thiết kế giúp các em đối phó với áp lực [mà các em gặp phải từ việc học ở trường]."</p>
+            <div class="exp-step-title">3. Tại sao chọn A?</div>
+            <p>Cụm "pressures [that] they feel from school work" nối liền logic với đối tượng trẻ em đang đi học -> Chọn A.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>B, C, D không thể đứng sau danh từ "pressures" để làm mệnh đề bổ nghĩa.</p>
+            <button class="btn-locate" onclick="locateEvidence('p2-s3')">🖱️ Vị trí dẫn chứng</button>
+          </div>
+        </div>
+
+        <!-- Q39 -->
+        <div class="question-card" id="qcard-39">
+          <div class="question-number">Question 39 (Sentence Insertion)</div>
+          <div class="question-text">...helps them to develop body awareness, (39)______.</div>
+          <div class="mcq-options" id="opts-39" data-correct="D">
+            <button class="mcq-btn" onclick="checkMCQ('39', 'A', 'D')">A. they feel from school work</button>
+            <button class="mcq-btn" onclick="checkMCQ('39', 'B', 'D')">B. before breakfast</button>
+            <button class="mcq-btn" onclick="checkMCQ('39', 'C', 'D')">C. it is good for both your body and mind</button>
+            <button class="mcq-btn" onclick="checkMCQ('39', 'D', 'D')">D. Self-control and flexibility</button>
+          </div>
+          <div class="explanation-box" id="exp-39">
+            <div class="exp-step-title">1. Phân tích ngữ pháp:</div>
+            <p>Phía trước có "develop body awareness," (danh từ). Sau dấu phẩy là danh từ nối liệt kê song song "Self-control and flexibility".</p>
+            <div class="exp-step-title">2. Dịch nghĩa câu 39:</div>
+            <p>"...giúp các em phát triển nhận thức cơ thể, [sự tự chủ và tính dẻo dai]."</p>
+            <div class="exp-step-title">3. Tại sao chọn D?</div>
+            <p>Cấu trúc liệt kê danh từ: "body awareness, self-control and flexibility" (nhận thức cơ thể, sự tự chủ và tính dẻo dai) -> Chọn D.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>A, B, C không phải là cụm danh từ để nối tiếp chuỗi danh từ liệt kê phía trước.</p>
+            <button class="btn-locate" onclick="locateEvidence('p2-s4')">🖱️ Vị trí dẫn chứng</button>
+          </div>
+        </div>
+
+        <!-- Q40 -->
+        <div class="question-card" id="qcard-40">
+          <div class="question-number">Question 40 (Sentence Insertion)</div>
+          <div class="question-text">An ideal time to do yoga is (40)______.</div>
+          <div class="mcq-options" id="opts-40" data-correct="B">
+            <button class="mcq-btn" onclick="checkMCQ('40', 'A', 'B')">A. they feel from school work</button>
+            <button class="mcq-btn" onclick="checkMCQ('40', 'B', 'B')">B. before breakfast</button>
+            <button class="mcq-btn" onclick="checkMCQ('40', 'C', 'B')">C. it is good for both your body and mind</button>
+            <button class="mcq-btn" onclick="checkMCQ('40', 'D', 'B')">D. Self-control and flexibility</button>
+          </div>
+          <div class="explanation-box" id="exp-40">
+            <div class="exp-step-title">1. Phân tích ngữ pháp & ý nghĩa:</div>
+            <p>Chủ ngữ là "An ideal time to do yoga" (Thời điểm lý tưởng để tập yoga). Sau động từ tobe "is" cần một cụm từ chỉ mốc thời điểm ("before breakfast").</p>
+            <div class="exp-step-title">2. Dịch nghĩa câu 40:</div>
+            <p>"Thời điểm lý tưởng để tập yoga là [trước bữa ăn sáng]."</p>
+            <div class="exp-step-title">3. Tại sao chọn B?</div>
+            <p>"An ideal time... is before breakfast" bổ ngữ thời gian hoàn chỉnh cho câu -> Chọn B.</p>
+            <div class="exp-step-title">4. Tại sao 3 đáp án còn lại SAI?</div>
+            <p>A, C, D không phải cụm từ chỉ thời gian trong ngày.</p>
+            <button class="btn-locate" onclick="locateEvidence('p2-s6')">🖱️ Vị trí dẫn chứng</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Bar Submit -->
+      <div class="action-bar">
+        <button class="btn-submit-test" onclick="submitTest()">🏆 NỘP BÀI THI</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Score Modal -->
+  <div class="modal-overlay" id="scoreModal">
+    <div class="modal-card">
+      <h2 style="color: var(--primary-purple); font-size: 1.8rem;">🎉 KẾT QUẢ BÀI THI 🎉</h2>
+      <div class="modal-score" id="scoreValue">0 / 12</div>
+      <div class="modal-badge" id="scoreBadge">THIÊN TÀI IELTS 9.0!</div>
+      <p id="scoreComment" style="color: #555; line-height: 1.5; font-weight: 700;">Em làm bài rất tuyệt vời!</p>
+      <button class="btn-submit-test" style="margin-top: 20px; font-size: 0.95rem; padding: 10px 25px;" onclick="closeModal()">ĐÓNG & XEM LẠI BÀI</button>
+    </div>
+  </div>
+
+  <script>
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playCorrectSound() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.12);
+      osc.frequency.exponentialRampToValueAtTime(783.99, audioCtx.currentTime + 0.25);
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.35);
+    }
+
+    function playWrongSound() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(130.81, audioCtx.currentTime + 0.25);
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.3);
+    }
+
+    let totalQuestions = 12;
+    let userAnswers = {};
+    let timerSeconds = 20 * 60;
+    let timerInterval = null;
+    let isTimerRunning = false;
+
+    function toggleTimer() {
+      const btn = document.getElementById('btnTimerControl');
+      if (!isTimerRunning) {
+        isTimerRunning = true;
+        btn.innerText = "TẠM DỪNG";
+        btn.style.background = "#ff9800";
+        timerInterval = setInterval(updateTimer, 1000);
+      } else {
+        isTimerRunning = false;
+        btn.innerText = "TIẾP TỤC";
+        btn.style.background = "#4caf50";
+        clearInterval(timerInterval);
+      }
+    }
+
+    function updateTimer() {
+      if (timerSeconds <= 0) {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+        document.getElementById('timerDisplay').innerText = "00:00";
+        alert("⏰ Đã hết giờ làm bài, vui lòng nộp bài nhé!");
+        disableInputs();
+        submitTest();
+        return;
+      }
+      timerSeconds--;
+      let m = Math.floor(timerSeconds / 60);
+      let s = timerSeconds % 60;
+      document.getElementById('timerDisplay').innerText = 
+        `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`;
+    }
+
+    function disableInputs() {
+      document.querySelectorAll('input, select, button.mcq-btn').forEach(el => {
+        el.disabled = true;
+      });
+    }
+
+    // CHUYỂN TAB ĐỘC LẬP TỪNG BÀI
+    function switchTab(tabIndex) {
+      document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        btn.classList.toggle('active', idx + 1 === tabIndex);
+      });
+
+      document.querySelectorAll('.passage-content').forEach((p, idx) => {
+        p.style.display = (idx + 1 === tabIndex) ? 'block' : 'none';
+      });
+
+      document.querySelectorAll('.exercise-tab-content').forEach((ex, idx) => {
+        ex.style.display = (idx + 1 === tabIndex) ? 'block' : 'none';
+      });
+
+      document.getElementById('passagePane').scrollTop = 0;
+      document.getElementById('exercisePane').scrollTop = 0;
+    }
+
+    function toggleTranslation(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function updateProgress() {
+      let count = Object.keys(userAnswers).length;
+      let pct = (count / totalQuestions) * 100;
+      document.getElementById('progressBarFill').style.width = pct + '%';
+    }
+
+    function checkMCQ(qKey, chosenOptKey, correctOptKey) {
+      const container = document.getElementById(`opts-${qKey}`);
+      const btns = container.querySelectorAll('.mcq-btn');
+      const exp = document.getElementById(`exp-${qKey}`);
+
+      btns.forEach(btn => btn.disabled = true);
+      exp.style.display = 'block';
+
+      btns.forEach(btn => {
+        let optText = btn.innerText.trim();
+        let isChosen = optText.startsWith(chosenOptKey);
+        let isCorrect = optText.startsWith(correctOptKey);
+
+        if (isChosen) {
+          if (chosenOptKey === correctOptKey) {
+            btn.classList.add('correct');
+            playCorrectSound();
+            userAnswers[qKey] = true;
+            launchConfetti();
+          } else {
+            btn.classList.add('wrong');
+            playWrongSound();
+            userAnswers[qKey] = false;
+          }
+        }
+        if (isCorrect && chosenOptKey !== correctOptKey) {
+          btn.classList.add('correct');
+        }
+      });
+      updateProgress();
+    }
+
+    function locateEvidence(sentenceId) {
+      if (sentenceId.startsWith('p1')) switchTab(1);
+      else if (sentenceId.startsWith('p2')) switchTab(2);
+
+      document.querySelectorAll('.sentence').forEach(s => s.classList.remove('sentence-target'));
+      const target = document.getElementById(sentenceId);
+      if (target) {
+        target.classList.add('sentence-target');
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+
+    document.addEventListener('mouseup', function() {
+      const selection = window.getSelection();
+      if (!selection.isCollapsed && selection.toString().trim().length > 0) {
+        const range = selection.getRangeAt(0);
+        const span = document.createElement('span');
+        span.className = 'custom-highlight';
+        try {
+          range.surroundContents(span);
+        } catch (e) {}
+      }
+    });
+
+    function shuffleOptionsOnLoad() {
+      document.querySelectorAll('.mcq-options').forEach(container => {
+        const buttons = Array.from(container.children);
+        for (let i = buttons.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [buttons[i], buttons[j]] = [buttons[j], buttons[i]];
+        }
+        buttons.forEach(btn => container.appendChild(btn));
+      });
+    }
+
+    function submitTest() {
+      let score = 0;
+      for (let k in userAnswers) {
+        if (userAnswers[k] === true) score++;
+      }
+
+      document.getElementById('scoreValue').innerText = `${score} / ${totalQuestions}`;
+      const badge = document.getElementById('scoreBadge');
+      const comment = document.getElementById('scoreComment');
+
+      let pct = (score / totalQuestions) * 100;
+      if (pct === 100) {
+        badge.innerText = "🏆 THIÊN TÀI IELTS 9.0!";
+        comment.innerText = "Xuất sắc tuyệt đối! Em đã làm đúng 100% toàn bộ bài thi!";
+      } else if (pct >= 70) {
+        badge.innerText = "🌟 LÀM TỐT LẮM!";
+        comment.innerText = "Kỹ năng đọc hiểu rất ấn tượng! Đọc lại giải thích 4 bước để đạt điểm tuyệt đối nhé!";
+      } else if (pct >= 50) {
+        badge.innerText = "👍 KHÁ TỐT!";
+        comment.innerText = "Em đã làm tương đối tốt. Hãy đọc kỹ lại phần giải thích để cải thiện các câu làm sai!";
+      } else {
+        badge.innerText = "💪 CỐ LÊN NHÉ!";
+        comment.innerText = "Đừng nản lòng! Đọc kỹ các câu dịch và từ vựng mở rộng để sẵn sàng cho bài học tiếp theo!";
+      }
+
+      document.getElementById('scoreModal').style.display = 'flex';
+      launchConfetti();
+    }
+
+    function closeModal() {
+      document.getElementById('scoreModal').style.display = 'none';
+    }
+
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      let pieces = [];
+      const colors = ['#ff80ab', '#8854c0', '#00D26A', '#FDCB6E', '#00C9A7'];
+      
+      for (let i = 0; i < 70; i++) {
+        pieces.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speed: Math.random() * 4 + 2,
+          rotation: Math.random() * 360,
+          rotSpeed: Math.random() * 6 - 3
+        });
+      }
+
+      let animationFrame;
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pieces.forEach(p => {
+          p.y += p.speed;
+          p.rotation += p.rotSpeed;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+        });
+        pieces = pieces.filter(p => p.y < canvas.height);
+        if (pieces.length > 0) {
+          animationFrame = requestAnimationFrame(animate);
+        } else {
+          cancelAnimationFrame(animationFrame);
+        }
+      }
+      animate();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      shuffleOptionsOnLoad();
+    });
+  </script>
+</body>
+</html>
